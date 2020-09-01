@@ -1,0 +1,56 @@
+server:
+  port: 8102
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: server-provider
+  zipkin:
+    base-url: http://${properties.zipkin-addr}:${properties.zipkin-port}
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    nacos:
+      username: ${properties.nacos-user}
+      password: ${properties.nacos-pass}
+      discovery:
+        server-addr: ${properties.nacos-addr}:${properties.nacos-port}
+      config:
+        server-addr: ${properties.nacos-addr}:${properties.nacos-port}
+        prefix: gateway
+        file-extension: yaml
+        namespace: public
+    sentinel:
+      transport:
+        dashboard: ${properties.sentinel-addr}:${properties.sentinel-port}
+        port: 8719
+    stream:
+      rocketmq:
+        binder:
+          name-server: ${properties.rocketmq-addr}:${properties.rocketmq-port}
+        bindings:
+          input:
+            consumer:
+              orderly: true
+      bindings:
+        output:
+          destination: server-provider
+          content-type: application/json
+          group: server-group
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+feign:
+  sentinel:
+    enabled: true
+logging:
+  level:
+    org.springframework.cloud.gateway: WARN
+    com.alibaba.nacos.client.config.impl.ClientWorker: WARN
+

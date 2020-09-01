@@ -1,0 +1,22 @@
+properties:
+  common-addr: localhost
+  nacos-addr: ${properties.common-addr}
+  nacos-port: 8848
+  nacos-user: nacos
+  nacos-pass: marking123
+  sentinel-addr: ${properties.common-addr}
+  sentinel-port: 8858
+  mysql-addr: ${properties.common-addr}
+  mysql-port: 3306
+  mysql-user: root
+  mysql-pass: marking123
+  redis-addr: ${properties.common-addr}
+  redis-port: 6379
+  rocketmq-addr: ${properties.common-addr}
+  rocketmq-port: 9876
+  seata-addr: ${properties.common-addr}
+  seata-port: 8091
+  zipkin-addr: ${properties.common-addr}
+  zipkin-port: 9411
+
+

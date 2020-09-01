@@ -1,0 +1,68 @@
+server:
+  port: 8100
+  tomcat:
+    uri-encoding: UTF-8
+properties:
+  common-addr: localhost
+  nacos-addr: ${properties.common-addr}
+  nacos-port: 8848
+  nacos-user: nacos
+  nacos-pass: marking123
+  sentinel-addr: ${properties.common-addr}
+  sentinel-port: 8858
+  zipkin-addr: ${properties.common-addr}
+  zipkin-port: 9411
+spring:
+  application:
+    name: gateway-server
+  profiles:
+    active: dev
+  zipkin:
+    base-url: http://${properties.zipkin-addr}:${properties.zipkin-port}
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    nacos:
+      username: ${properties.nacos-user}
+      password: ${properties.nacos-pass}
+      discovery:
+        server-addr: ${properties.nacos-addr}:${properties.nacos-port}
+      config:
+        server-addr: ${properties.nacos-addr}:${properties.nacos-port}
+        prefix: gateway
+        file-extension: yaml
+        namespace: public
+    sentinel:
+      transport:
+        dashboard: ${properties.sentinel-addr}:${properties.sentinel-port}
+        port: 8719
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: server-consumer
+          uri: lb://server-consumer
+          predicates:
+            - Path=/api/consumer/**
+        - id: server-provider
+          uri: lb://server-provider
+          predicates:
+            - Path=/api/provider/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+feign:
+  sentinel:
+    enabled: true
+logging:
+  level:
+    org.springframework.cloud.gateway: WARN
+    com.alibaba.nacos.client.config.impl.ClientWorker: WARN
+

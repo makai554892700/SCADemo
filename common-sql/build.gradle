@@ -1,0 +1,14 @@
+version '1.0-SNAPSHOT'
+archivesBaseName = 'common-dubbo-sql'
+jar.enabled = true
+bootJar.enabled = false
+dependencies {
+    api project(':common')
+    // sql 依赖
+    api("mysql:mysql-connector-java")
+    api("org.springframework.boot:spring-boot-starter-data-jpa")
+    // redis 依赖
+    api("org.springframework.boot:spring-boot-starter-data-redis")
+    // seata 依赖
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-seata")
+}

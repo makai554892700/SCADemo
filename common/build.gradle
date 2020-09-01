@@ -1,0 +1,24 @@
+version '1.0-SNAPSHOT'
+archivesBaseName = 'common'
+jar.enabled = true
+bootJar.enabled = false
+dependencies {
+    api("org.springframework.boot:spring-boot-starter-actuator")
+    api("org.springframework.boot:spring-boot-starter-web")
+    api("org.springframework.data:spring-data-commons:${springBootVersion}")
+    // nacos 注册中心 依赖
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+    // nacos 配置中心 依赖
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+    // sentinel 依赖
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel")
+    // openfeign 依赖
+    api("org.springframework.cloud:spring-cloud-starter-openfeign:${springCloudVersion}")
+    api("org.springframework.cloud:spring-cloud-starter-netflix-ribbon:${springCloudVersion}")
+    // zipkin 依赖
+    api("org.springframework.cloud:spring-cloud-starter-zipkin:${springCloudVersion}")
+    // fastjson 依赖
+    api("com.alibaba:fastjson:${fastjsonVersion}")
+    // base 依赖
+    api("com.mys.www:all-utils:0.0.8")
+}
