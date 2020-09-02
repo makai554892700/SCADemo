@@ -13,10 +13,10 @@ dependencies {
     // sentinel 依赖
     api("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel")
     // openfeign 依赖
-    api("org.springframework.cloud:spring-cloud-starter-openfeign:${springCloudVersion}")
-    api("org.springframework.cloud:spring-cloud-starter-netflix-ribbon:${springCloudVersion}")
+    api("org.springframework.cloud:spring-cloud-starter-openfeign")
+    api("org.springframework.cloud:spring-cloud-starter-netflix-ribbon")
     // zipkin 依赖
-    api("org.springframework.cloud:spring-cloud-starter-zipkin:${springCloudVersion}")
+    api("org.springframework.cloud:spring-cloud-starter-zipkin")
     // fastjson 依赖
     api("com.alibaba:fastjson:${fastjsonVersion}")
     // base 依赖

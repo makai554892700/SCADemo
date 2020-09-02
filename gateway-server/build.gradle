@@ -7,6 +7,6 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
     }
     //gateway 依赖
-    api("org.springframework.cloud:spring-cloud-starter-gateway:${springCloudVersion}")
+    api("org.springframework.cloud:spring-cloud-starter-gateway")
     api("com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway")
 }
