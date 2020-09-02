@@ -18,26 +18,13 @@ spring:
         server-addr: ${properties.nacos-addr}:${properties.nacos-port}
       config:
         server-addr: ${properties.nacos-addr}:${properties.nacos-port}
-        prefix: gateway
+        prefix: consumer
         file-extension: yaml
         namespace: public
     sentinel:
       transport:
         dashboard: ${properties.sentinel-addr}:${properties.sentinel-port}
         port: 8719
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: server-consumer
-          uri: lb://server-consumer
-          predicates:
-            - Path=/api/consumer/**
-        - id: server-provider
-          uri: lb://server-provider
-          predicates:
-            - Path=/api/provider/**
     stream:
       rocketmq:
         binder:

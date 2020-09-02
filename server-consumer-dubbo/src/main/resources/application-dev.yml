@@ -1,10 +1,10 @@
 server:
-  port: 8102
+  port: 8101
   tomcat:
     uri-encoding: UTF-8
 spring:
   application:
-    name: server-provider
+    name: server-consumer
   zipkin:
     base-url: http://${properties.zipkin-addr}:${properties.zipkin-port}
   sleuth:
@@ -18,7 +18,7 @@ spring:
         server-addr: ${properties.nacos-addr}:${properties.nacos-port}
       config:
         server-addr: ${properties.nacos-addr}:${properties.nacos-port}
-        prefix: provider
+        prefix: server-consumer
         file-extension: yaml
         namespace: public
     sentinel:
@@ -34,7 +34,7 @@ spring:
             consumer:
               orderly: true
       bindings:
-        output:
+        input:
           destination: server-provider
           content-type: application/json
           group: server-group
@@ -53,4 +53,21 @@ logging:
   level:
     org.springframework.cloud.gateway: WARN
     com.alibaba.nacos.client.config.impl.ClientWorker: WARN
-
+dubbo:
+  application:
+    name: server-consumer
+  protocol:
+    port: 28804
+    name: dubbo
+  registry:
+    address: nacos://${properties.nacos-addr}:${properties.nacos-port}
+    #    username: ${properties.nacos-user}
+    username: nacos
+    password: ${properties.nacos-pass}
+  scan:
+    base-packages: www.mys.com.consumer.service
+  config-center:
+    address: nacos://${properties.nacos-addr}:${properties.nacos-port}
+    #    username: ${properties.nacos-user}
+    username: nacos
+    password: ${properties.nacos-pass}

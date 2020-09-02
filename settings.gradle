@@ -4,4 +4,6 @@ include 'common-sql'
 include 'gateway-server'
 include 'server-consumer'
 include 'server-provider'
+include 'server-consumer-dubbo'
+include 'server-provider-dubbo'
 

@@ -9,6 +9,7 @@ buildscript {
         maven { url 'https://repo.spring.io/snapshot' }
     }
     ext {
+        set('dubboVersion', "2.7.7")                        //2.7.7
         set('springBootVersion', "2.2.5.RELEASE")           //2.2.7.RELEASE
         set('springCloudAlibabaVersion', "2.2.1.RELEASE")   //2.2.1.RELEASE
         set('springCloudVersion', "2.2.5.RELEASE")   //2.2.1.RELEASE

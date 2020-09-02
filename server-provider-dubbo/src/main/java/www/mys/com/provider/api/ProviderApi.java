@@ -1,4 +1,4 @@
-package www.mys.com.consumer.api;
+package www.mys.com.provider.api;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -7,8 +7,8 @@ import www.mys.com.utils.Result;
 
 import javax.validation.Valid;
 
-@RequestMapping("/api/consumer")
-public interface ConsumerApi {
+@RequestMapping("/api/provider")
+public interface ProviderApi {
 
     @PostMapping(value = "/saveData")
     public Result<String> saveData(@RequestBody @Valid RequestData<String> requestData

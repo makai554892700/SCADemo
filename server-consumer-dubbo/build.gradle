@@ -1,0 +1,26 @@
+version = '0.0.1-SNAPSHOT'
+archivesBaseName = 'server-consumer'
+bootJar.enabled = true
+
+dependencies {
+    api(project(':common'))
+    // rocketmq 依赖
+    api("com.alibaba.cloud:spring-cloud-starter-stream-rocketmq")
+    //dubbo 依赖
+    api("org.apache.dubbo:dubbo:${dubboVersion}")
+    api("com.alibaba.cloud:spring-cloud-starter-dubbo")
+}
+
+task clearMYSJar(type: Delete) {
+    delete("${projectDir}/app.jar")
+}
+task copyMYSJar(type: Copy) {
+    from(file("${project.rootDir}/config/consumer.yml"))
+    into("${projectDir}")
+    from(file("${projectDir}/build/libs/${project.name}-${project.version}.jar"))
+    into("${projectDir}")
+    rename { String fileName ->
+        fileName.replace("${project.name}", "app").replace("-${project.version}", "")
+    }
+}
+copyMYSJar.dependsOn(buildNeeded, clearMYSJar)
